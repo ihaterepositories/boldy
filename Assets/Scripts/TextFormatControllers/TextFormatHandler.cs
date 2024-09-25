@@ -1,22 +1,18 @@
-using System;
-using TextFormatting;
+using TextFormatControllers.TextFormatters;
 using TMPro;
 using UnityEngine;
 using UserInterface;
 using Zenject;
 
-namespace Controllers
+namespace TextFormatControllers
 {
-    public class PastedTextHandler : MonoBehaviour 
+    public class TextFormatHandler : MonoBehaviour 
     {
         [SerializeField] private TextMeshProUGUI textField;
-
-        private string _pastedText;
-        
         private HalfWordPainter _halfWordPainter;
         
         [Inject]
-        private void Construct(TextReceivingButton textReceivingButton, HalfWordPainter halfWordPainter)
+        private void Construct(HalfWordPainter halfWordPainter)
         {
             _halfWordPainter = halfWordPainter;
         }

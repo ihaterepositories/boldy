@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace TextFormatting
+namespace TextFormatControllers.TextFormatters
 {
     public class HalfWordPainter
     {

@@ -1,5 +1,5 @@
-using Controllers;
-using TextFormatting;
+using TextFormatControllers;
+using TextFormatControllers.TextFormatters;
 using UserInterface;
 using Zenject;
 
@@ -16,7 +16,7 @@ namespace Infrastructure
         private void BindAppEngine()
         {
             Container.Bind<HalfWordPainter>().AsSingle();
-            Container.Bind<PastedTextHandler>().FromComponentInHierarchy().AsSingle();
+            Container.Bind<TextFormatHandler>().FromComponentInHierarchy().AsSingle();
         }
 
         private void BindUserInterface()
