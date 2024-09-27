@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace UserInterface
+namespace OtherUserInterface
 {
     public class AppMessageText : MonoBehaviour
     {

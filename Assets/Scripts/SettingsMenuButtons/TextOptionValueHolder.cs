@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace TextOptionsControllers
+namespace TextAppearence.TextOptions
 {
     public class TextOptionValueHolder : MonoBehaviour
     {
@@ -20,7 +20,7 @@ namespace TextOptionsControllers
         public Text buttonText;
         public event Action<int> OnValueChanged; 
         
-        private void Start()
+        private void Awake()
         {
             _defaultButtonText = buttonText.text;
             increaseButton.onClick.AddListener(IncreaseOption);

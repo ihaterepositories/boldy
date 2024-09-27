@@ -1,10 +1,12 @@
 using System.Collections.Generic;
 using DataModels;
+using TextAppearence.TextOptions;
 using TMPro;
 using UnityEngine;
 
-namespace TextOptionsControllers
+namespace TextAppearance.TextOptions
 {
+    // A class that unites and sets all text options in real time format
     public class TextOptionsHandler : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI textField;
@@ -66,8 +68,8 @@ namespace TextOptionsControllers
         
         private void SetFont(int value)
         {
-            textField.font = fonts[value].Font;
-            fontValueHolder.buttonText.text = fonts[value].FontName;
+            textField.font = fonts[value].font;
+            fontValueHolder.buttonText.text = fonts[value].fontName;
         }
     }
 }

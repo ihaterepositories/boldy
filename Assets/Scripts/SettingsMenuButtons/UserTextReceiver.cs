@@ -1,18 +1,19 @@
 using System;
+using OtherUserInterface;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace UserInterface
+namespace SettingsMenuButtons
 {
-    public class TextReceivingButton : MonoBehaviour
+    public class UserTextReceiver : MonoBehaviour
     {
-        [SerializeField] private Button button;
+        [SerializeField] private Button textReceivingButton;
         [SerializeField] private AppMessageText appMessageText;
-        public static event Action<string> OnTextReceived;
+        public event Action<string> OnTextReceived;
 
         private void Start()
         {
-            button.onClick.AddListener(() =>
+            textReceivingButton.onClick.AddListener(() =>
             {
                 var textFromClipboard = GetTextFromClipboard();
                 
@@ -22,7 +23,9 @@ namespace UserInterface
                     return;
                 }
                 
-                SaveAndSendText(textFromClipboard);
+                PlayerPrefs.SetString("LastText", textFromClipboard);
+                
+                OnTextReceived?.Invoke(textFromClipboard);
             });
         }
         
@@ -34,12 +37,6 @@ namespace UserInterface
         private void ShowErrorMessage()
         {
             appMessageText.ShowErrorMessage("You have no text in the clipboard...");
-        }
-        
-        private void SaveAndSendText(string text)
-        {
-            PlayerPrefs.SetString("ReceivedText", text);
-            OnTextReceived?.Invoke(text);
         }
     }
 }
