@@ -1,21 +1,14 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
-using Zenject;
 
 namespace UserInterface
 {
     public class TextReceivingButton : MonoBehaviour
     {
         [SerializeField] private Button button;
-        private AppMessage _appMessage;
+        [SerializeField] private AppMessageText appMessageText;
         public static event Action<string> OnTextReceived;
-        
-        [Inject]
-        private void Construct(AppMessage appMessage)
-        {
-            _appMessage = appMessage;
-        }
 
         private void Start()
         {
@@ -40,7 +33,7 @@ namespace UserInterface
         
         private void ShowErrorMessage()
         {
-            _appMessage.ShowErrorMessage("You have no text in the clipboard...");
+            appMessageText.ShowErrorMessage("You have no text in the clipboard...");
         }
         
         private void SaveAndSendText(string text)

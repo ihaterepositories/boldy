@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace UserInterface
 {
-    public class AppMessage : MonoBehaviour
+    public class AppMessageText : MonoBehaviour
     {
         [SerializeField] private Text textObject;
         

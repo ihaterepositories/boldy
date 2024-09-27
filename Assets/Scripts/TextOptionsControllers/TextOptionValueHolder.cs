@@ -13,11 +13,11 @@ namespace TextOptionsControllers
         [SerializeField] private int minValue;
         [SerializeField] private int maxValue;
         [SerializeField] private int valueMultiplier = 1;
-        [SerializeField] private Text buttonText;
         
         private int _value;
         private string _defaultButtonText;
         
+        public Text buttonText;
         public event Action<int> OnValueChanged; 
         
         private void Start()

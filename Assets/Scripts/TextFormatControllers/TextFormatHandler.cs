@@ -9,13 +9,7 @@ namespace TextFormatControllers
     public class TextFormatHandler : MonoBehaviour 
     {
         [SerializeField] private TextMeshProUGUI textField;
-        private HalfWordPainter _halfWordPainter;
-        
-        [Inject]
-        private void Construct(HalfWordPainter halfWordPainter)
-        {
-            _halfWordPainter = halfWordPainter;
-        }
+        private readonly HalfWordPainter _halfWordPainter = new();
         
         private void Start()
         {

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 971b69f50405d8d49a76237c5db03a3e
+guid: a22eb02195b4ecb40a26b54c3f7377b3
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Helvetica Light
+  - Helvetica
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
