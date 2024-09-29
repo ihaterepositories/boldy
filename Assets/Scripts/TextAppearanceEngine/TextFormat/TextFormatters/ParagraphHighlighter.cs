@@ -8,27 +8,19 @@ namespace TextAppearanceEngine.TextFormat.TextFormatters
         
         public string Highlight(string text)
         {
-            var paragraphs = text.Split(
-                new[] { '\n', '\r' }, 
-                System.StringSplitOptions.RemoveEmptyEntries);
-            
-            for (var i = 0; i < paragraphs.Length; i++)
-            {
-                var paragraph = paragraphs[i];
-                var firstSpaceIndex = paragraph.IndexOf(' ');
-                if (firstSpaceIndex == -1) firstSpaceIndex = paragraph.Length;
+            var firstSpaceIndex = text.IndexOf(' ');
+            if (firstSpaceIndex == -1) firstSpaceIndex = text.Length;
 
-                var firstWord = paragraph.Substring(0, firstSpaceIndex);
-                
-                // Remove all previous HTML tags from the first word
-                firstWord = new Regex("<.*?>").Replace(firstWord, string.Empty);
-                
-                var remainingText = paragraph.Substring(firstSpaceIndex);
-                
-                paragraphs[i] = $"   <b><color=#{_colorToHighlight}>{firstWord}</color></b>{remainingText}";
-            }
+            var firstWord = text.Substring(0, firstSpaceIndex);
             
-            var highlightedText = string.Join("\n", paragraphs);
+            // Remove all previous HTML tags from the first word
+            firstWord = new Regex("<.*?>").Replace(firstWord, string.Empty);
+            
+            var remainingText = text.Substring(firstSpaceIndex);
+            
+            text = $"   <b><color=#{_colorToHighlight}>{firstWord}</color></b>{remainingText}";
+            
+            var highlightedText = string.Join("\n", text);
 
             return highlightedText;
         }

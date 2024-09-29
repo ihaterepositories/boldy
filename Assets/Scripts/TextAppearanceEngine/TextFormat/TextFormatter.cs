@@ -9,19 +9,33 @@ namespace TextAppearanceEngine.TextFormat
     {
         [SerializeField] private TextFormattingOptionValueHolder halfWordsPaintingValueHolder;
         [SerializeField] private TextFormattingOptionValueHolder paragraphHighlightingValueHolder;
+        [SerializeField] private TextFormattingOptionValueHolder keywordsHighlightingValueHolder;
         
-        private readonly HalfWordPainter _halfWordPainter = new();
+        private readonly WordsHalvesPainter _wordsHalvesPainter = new();
         private readonly ParagraphHighlighter _paragraphHighlighter = new();
+        private readonly KeyWordsHighlighter _keyWordsHighlighter = new();
 
         public string FormatText(string text)
         {
-            var formattedText = text;
+            var formattedText = string.Empty;
             
-            if(halfWordsPaintingValueHolder.Value)
-                formattedText = _halfWordPainter.Paint(formattedText);
-            
-            if(paragraphHighlightingValueHolder.Value)
-                formattedText = _paragraphHighlighter.Highlight(formattedText);
+            var paragraphs = text.Split(
+                new[] { '\n', '\r' }, 
+                System.StringSplitOptions.RemoveEmptyEntries);
+
+            for (var i = 0; i < paragraphs.Length; i++)
+            {
+                if (keywordsHighlightingValueHolder.Value)
+                    paragraphs[i] = _keyWordsHighlighter.Highlight(paragraphs[i]);
+
+                if (halfWordsPaintingValueHolder.Value)
+                    paragraphs[i] = _wordsHalvesPainter.Paint(paragraphs[i]);
+
+                if (paragraphHighlightingValueHolder.Value)
+                    paragraphs[i] = _paragraphHighlighter.Highlight(paragraphs[i]);
+                
+                formattedText += paragraphs[i] + "\n";
+            }
 
             return formattedText;
         }

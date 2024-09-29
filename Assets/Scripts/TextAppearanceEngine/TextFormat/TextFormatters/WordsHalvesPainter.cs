@@ -2,37 +2,30 @@ using UnityEngine;
 
 namespace TextAppearanceEngine.TextFormat.TextFormatters
 {
-    public class HalfWordPainter
+    public class WordsHalvesPainter
     {
         private readonly string _colorToPaint = 
             ColorUtility.ToHtmlStringRGB(new Color(0.1f, 0.1f, 0.1f));
         
         public string Paint(string text)
         {
-            var lines = text.Split('\n');
-
             var paintedText = "";
+            
+            var words = text.Split(' ');
 
-            foreach (var line in lines)
+            foreach (var word in words)
             {
-                var words = line.Split(' ');
-
-                foreach (var word in words)
+                if (word.Length > 1)
                 {
-                    if (word.Length > 1)
-                    {
-                        paintedText += PaintWord(word) + " ";
-                    }
-                    else
-                    {
-                        paintedText += word + " ";
-                    }
+                    paintedText += PaintWord(word) + " ";
                 }
-                
-                paintedText = paintedText.TrimEnd() + "\n";
+                else
+                {
+                    paintedText += word + " ";
+                }
             }
 
-            return paintedText.TrimEnd();
+            return paintedText;
         }
         
         private string PaintWord(string word)
