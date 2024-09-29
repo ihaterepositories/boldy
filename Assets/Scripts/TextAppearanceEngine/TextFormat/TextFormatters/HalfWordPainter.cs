@@ -1,45 +1,46 @@
 using UnityEngine;
 
-namespace TextAppearence.TextFormat.TextFormatters
+namespace TextAppearanceEngine.TextFormat.TextFormatters
 {
     public class HalfWordPainter
     {
-        private Color boldColor = new Color(0.1f, 0.1f, 0.1f);
+        private readonly string _colorToPaint = 
+            ColorUtility.ToHtmlStringRGB(new Color(0.1f, 0.1f, 0.1f));
         
         public string Paint(string text)
         {
-            string[] lines = text.Split('\n');  // Розділяємо текст на абзаци за символами нового рядка
-            string colorHex = ColorUtility.ToHtmlStringRGB(boldColor);  // Перетворюємо колір на hex-код
+            var lines = text.Split('\n');
 
-            string formattedText = "";
+            var paintedText = "";
 
-            foreach (string line in lines)
+            foreach (var line in lines)
             {
-                string[] words = line.Split(' ');  // Розділяємо рядок на слова
+                var words = line.Split(' ');
 
-                foreach (string word in words)
+                foreach (var word in words)
                 {
-                    if (word.Length > 1)  // Перевіряємо, щоб слово було не порожнім
+                    if (word.Length > 1)
                     {
-                        int halfLength = word.Length / 2;
-                        string boldPart = word.Substring(0, halfLength);  // Перша половина слова
-                        string normalPart = word.Substring(halfLength);   // Друга половина слова
-
-                        // Форматуємо кожне слово
-                        formattedText += $"<b><color=#{colorHex}>{boldPart}</color></b>{normalPart} ";
+                        paintedText += PaintWord(word) + " ";
                     }
                     else
                     {
-                        // Якщо слово має одну літеру або порожнє, просто додаємо його
-                        formattedText += word + " ";
+                        paintedText += word + " ";
                     }
                 }
-
-                // Додаємо символ нового рядка після кожного рядка (або абзацу)
-                formattedText = formattedText.TrimEnd() + "\n";
+                
+                paintedText = paintedText.TrimEnd() + "\n";
             }
 
-            return formattedText.TrimEnd();  // Видаляємо зайві пробіли і символи нового рядка в кінці
+            return paintedText.TrimEnd();
+        }
+        
+        private string PaintWord(string word)
+        {
+            var halfLength = word.Length / 2;
+            var boldPart = word.Substring(0, halfLength);
+            var normalPart = word.Substring(halfLength);
+            return $"<b><color=#{_colorToPaint}>{boldPart}</color></b>{normalPart}";
         }
     }
 }

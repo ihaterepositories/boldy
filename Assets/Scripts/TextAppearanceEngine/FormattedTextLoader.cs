@@ -1,5 +1,5 @@
 using SettingsMenuButtons;
-using TextAppearance.TextFormat;
+using TextAppearanceEngine.TextFormat;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;

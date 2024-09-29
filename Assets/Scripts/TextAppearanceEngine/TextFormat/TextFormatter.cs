@@ -1,15 +1,17 @@
 using SettingsMenuButtons;
-using TextAppearence.TextFormat.TextFormatters;
+using TextAppearanceEngine.TextFormat.TextFormatters;
 using UnityEngine;
 
-namespace TextAppearance.TextFormat
+namespace TextAppearanceEngine.TextFormat
 {
     // A class that unites and run all text formatters
     public class TextFormatter : MonoBehaviour 
     {
         [SerializeField] private TextFormattingOptionValueHolder halfWordsPaintingValueHolder;
+        [SerializeField] private TextFormattingOptionValueHolder paragraphHighlightingValueHolder;
         
         private readonly HalfWordPainter _halfWordPainter = new();
+        private readonly ParagraphHighlighter _paragraphHighlighter = new();
 
         public string FormatText(string text)
         {
@@ -18,7 +20,8 @@ namespace TextAppearance.TextFormat
             if(halfWordsPaintingValueHolder.Value)
                 formattedText = _halfWordPainter.Paint(formattedText);
             
-            // other formatting
+            if(paragraphHighlightingValueHolder.Value)
+                formattedText = _paragraphHighlighter.Highlight(formattedText);
 
             return formattedText;
         }
